@@ -10,10 +10,19 @@ program
   .version(packageJSON.version)
   .argument('[dir]', 'Folder that contains changeset files.', '.changeset')
   .option('-f, --format [text|json]', 'Format of the output. Supported formats: text and json.', 'text')
-  .action(async (dir, { format }) => {
+  .option('-v, --verbose', 'Output additiona information')
+  .action(async (dir, { format, verbose: isVerbose }) => {
+
+    if (isVerbose) {
+      console.log({
+        dir,
+        format,
+        verbose: isVerbose,
+      })
+    }
     
     try {
-      const result = await searchChangesetFolder(dir);
+      const result = await searchChangesetFolder(dir, isVerbose);
       let formatted;
       switch(format) {
         case 'json':
@@ -31,4 +40,4 @@ program
   });
 
 
-  program.parse();
+program.parse();
