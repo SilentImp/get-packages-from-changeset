@@ -1,6 +1,6 @@
 {
   "name": "get-packages-from-changeset",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Collect the list of packages from changeset folder",
   "main": "index.js",
   "bin": {
@@ -11,7 +11,9 @@
     "minor": "npm version minor && npm publish && git push --follow-tags",
     "major": "npm version major && npm publish && git push --follow-tags"
   },
-  "keywords": ["changeset"],
+  "keywords": [
+    "changeset"
+  ],
   "author": "Anton Nemtsev <newsilentimp@gmail.com>",
   "license": "ISC",
   "dependencies": {
