@@ -33,7 +33,7 @@ program
         default:
           
       }
-      process.stdout.write(formatted);
+      console.log(formatted);
     } catch (error) {
       program.error(error.stderr ? error.stderr.toString() : error.message);
     }
