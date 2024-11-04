@@ -32,10 +32,18 @@ program
           formatted = result.join(', ');
           break;
         case 'deps':
+          if (result.length === 0) {
+            formatted = '';
+            break;
+          }
           formatted = `--filter=...${result.join(' --filter=...')}`;
           break;
         case 'filter':
         default:
+          if (result.length === 0) {
+            formatted = '';
+            break;
+          }
           formatted = `--filter=${result.join(' --filter=')}`;
       }
       console.log(formatted);
