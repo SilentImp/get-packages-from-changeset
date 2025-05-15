@@ -1,6 +1,6 @@
 {
   "name": "get-packages-from-changeset",
-  "version": "1.0.5",
+  "version": "1.1.5",
   "description": "Collect the list of packages from changeset folder",
   "main": "index.js",
   "bin": {

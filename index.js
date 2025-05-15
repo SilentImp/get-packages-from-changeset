@@ -10,19 +10,37 @@ program
   .version(packageJSON.version)
   .argument('[dir]', 'Folder that contains changeset files.', '.changeset')
   .option('-f, --format [text|json|filter|deps]', 'Format of the output. Supported formats: text and json.', 'text')
+  .option('-e, --exclude [excludePackages...]', 'Exclude packages')
+  .option('-i, --include [includePackages...]', 'Only include packages')
   .option('-v, --verbose', 'Output additiona information')
-  .action(async (dir, { format, verbose: isVerbose }) => {
+  .action(async (dir, { format, exclude, include, verbose: isVerbose }) => {
 
     if (isVerbose) {
       console.log({
         dir,
         format,
+        exclude,
+        include,
         verbose: isVerbose,
       })
     }
     
     try {
-      const result = await searchChangesetFolder(dir, isVerbose);
+      let result = await searchChangesetFolder(dir, isVerbose);
+      result = [...new Set(result)];
+
+      if ( Array.isArray(exclude) && exclude.length > 0 ) {
+        result = result.filter(item => !exclude.includes(item));
+      }
+
+      if ( Array.isArray(include) && include.length > 0 ) {
+        result = result.filter(item => include.includes(item));
+      }
+
+      if (isVerbose) {
+        console.log(result);
+      }
+
       let formatted;
       switch(format) {
         case 'json':
@@ -43,7 +61,7 @@ program
           if (result.length === 0) {
             formatted = '';
             break;
-          }
+          } 
           formatted = `--filter=${result.join(' --filter=')}`;
       }
       console.log(formatted);

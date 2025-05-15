@@ -14,9 +14,13 @@ Execute:
 ```
 npx get-packages-from-changeset
 npx get-packages-from-changeset .changeset-folder -f json
+npx get-packages-from-changeset .changeset-folder -f filter -e org/package-1 org/package-2
+npx get-packages-from-changeset .changeset-folder -f filter -i org/package-1 org/package-2
 ```
 
 Where: 
 
 - .changeset-folder - Folder that contains changeset files. Default value: `.changeset`.
-- -f, --format json | text - Format of the output. Supported formats: text and json. Default value: `text`.
+- -f, --format json | text | filter | deps - Format of the output. Supported formats: text and json. Default value: `text`.
+- -i, --include org/package1 org/package2 - Space separated list of packages that will be included. If package not on this list: it will not be included. If not provided, then all packages will be included.
+- -e, --exclude org/package1 org/package2 - Space separated list of packages that will be excluded. If package on this list: it will not be included.
